@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     downloadBtn.addEventListener('click', () => {
         // Set the APK file path from the rsc folder
-        const apkUrl = 'rsc/Parkinson.apk';
+        const apkUrl = 'Parkinson.apk';
         
         // Create a temporary link element
         const link = document.createElement('a');
