@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Botón para descargar app-release.apk
     downloadReleaseBtn.addEventListener('click', () => {
         // Set the APK file path from the rsc folder
-        const apkUrl = 'rsc/app-release.apk';
+        const apkUrl = 'https://drive.google.com/file/d/1XY1T_T_jvDphQr92QT9WZN-nDgFPEM9B/view?usp=sharing';
         
         // Create a temporary link element
         const link = document.createElement('a');
