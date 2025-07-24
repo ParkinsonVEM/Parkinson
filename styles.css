@@ -1,0 +1,758 @@
+:root {
+    --black: #000000;
+    --dark-gray: #1d1d1f;
+    --medium-gray: #86868b;
+    --light-gray: #f5f5f7;
+    --white: #ffffff;
+    --accent: #2997ff;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    --transition-slow: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 3rem;
+    --spacing-xl: 4rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 2rem;
+    --font-size-4xl: 2.5rem;
+    --font-size-5xl: 3rem;
+    --font-size-6xl: 4rem;
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-full: 9999px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--white);
+    color: var(--dark-gray);
+    line-height: 1.6;
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+header {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+header h1 {
+    color: var(--black);
+    font-size: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+header h1 img {
+    height: 2rem;
+    width: auto;
+}
+
+.hero {
+    background-image: url('img/Background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 0;
+    z-index: 1;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+}
+
+.hero-content {
+    padding: 2rem;
+    color: var(--white);
+    max-width: 80%;
+    position: relative;
+    z-index: 5;
+    animation: fadeIn 1s ease-out;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-content h2 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transform: translateZ(50px);
+    letter-spacing: -0.02em;
+    animation: float 6s ease-in-out infinite;
+}
+
+.hero-content p {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    opacity: 0.9;
+    font-weight: 300;
+    transform: translateZ(30px);
+    animation: float 6s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.preview-float {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%) translateZ(20px);
+    width: 55%;
+    max-width: 550px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+    animation: float 6s ease-in-out infinite;
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: block !important;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.preview-float img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    transition: var(--transition);
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+    transform-style: preserve-3d;
+}
+
+.preview-float:hover {
+    transform: translateX(-50%) translateZ(20px) scale(1.05);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+.section-title {
+    text-align: center;
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    margin: var(--spacing-xl) 0 var(--spacing-lg);
+    color: var(--black);
+    letter-spacing: -0.03em;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent);
+}
+
+.terapias-grid, .comentarios-grid, .recuerdos-container, .comentarios-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) auto;
+    max-width: 1200px;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative;
+    z-index: 2;
+}
+
+.terapias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: var(--spacing-lg);
+}
+
+.terapia-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    transform: translateY(0);
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    opacity: 1;
+}
+
+.terapia-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.terapia-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.terapia-card:hover img {
+    transform: scale(1.05);
+}
+
+.terapia-content {
+    padding: 1.5rem;
+}
+
+.terapia-content h4 {
+    font-size: var(--font-size-xl);
+    margin-bottom: 0.5rem;
+    color: var(--black);
+    font-weight: 600;
+}
+
+.terapia-content p {
+    color: var(--medium-gray);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+}
+
+.comentarios-section {
+    background-color: var(--light-gray);
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    z-index: 2;
+    margin: 4rem auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-width: 1400px;
+}
+
+.comentarios-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.comentario {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: var(--shadow);
+    position: relative;
+    transition: var(--transition);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.comentario:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.comentario-texto {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: var(--dark-gray);
+    position: relative;
+}
+
+.comentario-texto::before {
+    content: '\201C';
+    font-size: 4rem;
+    color: var(--accent);
+    position: absolute;
+    top: -2rem;
+    left: -1rem;
+    opacity: 0.2;
+}
+
+.comentario-autor {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.comentario-autor-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.comentario-autor-nombre {
+    font-weight: 600;
+    color: var(--black);
+}
+
+.comentario-autor-rol {
+    font-size: var(--font-size-sm);
+    color: var(--medium-gray);
+}
+
+.recuerdos-section {
+    padding: var(--spacing-xl) var(--spacing-md);
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--white);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    transition: var(--transition);
+}
+
+.carousel-button:hover {
+    background: var(--accent);
+    color: var(--white);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    gap: 0.5rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--light-gray);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.dot.active {
+    background: var(--accent);
+    transform: scale(1.2);
+}
+
+.recuerdos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    perspective: 1000px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) var(--light-gray);
+}
+
+.recuerdos-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.recuerdos-container::-webkit-scrollbar-track {
+    background: var(--light-gray);
+    border-radius: var(--radius-full);
+}
+
+.recuerdos-container::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border-radius: var(--radius-full);
+}
+
+.recuerdo-card {
+    height: 400px;
+    min-width: 300px;
+    flex: 0 0 300px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    opacity: 1;
+    transform: translateY(0);
+    scroll-snap-align: center;
+}
+
+.recuerdo-card:hover {
+    transform: rotateY(10deg) rotateX(5deg);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.recuerdo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    transition: var(--transition);
+}
+
+.recuerdo-card:hover img {
+    transform: scale(1.05);
+}
+
+.download-section {
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-md);
+    background: var(--black);
+    margin-top: var(--spacing-xl);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.download-btn {
+    background: var(--white);
+    color: var(--black);
+    border: none;
+    padding: 1.2rem 3.5rem;
+    font-size: var(--font-size-lg);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.download-btn .material-icons {
+    font-size: 1.5rem;
+}
+
+.download-btn-small {
+    padding: 0.8rem 1.5rem;
+    font-size: var(--font-size-base);
+    background: var(--dark-gray);
+    color: var(--white);
+}
+
+.download-btn-link {
+    background: transparent;
+    border: 2px solid var(--white);
+    color: var(--white);
+    text-decoration: none;
+}
+
+.download-btn:hover {
+    background: var(--accent);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+footer {
+    background-color: var(--black);
+    color: var(--white);
+    text-align: center;
+    padding: var(--spacing-lg);
+    margin-top: auto;
+    position: relative;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (min-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+
+    header {
+        padding: 1.5rem 4rem;
+    }
+
+    .hero-content h2 {
+        font-size: 4.5rem;
+    }
+
+    .terapias-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .comentarios-container {
+        flex-direction: row;
+    }
+
+    .recuerdos-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Estilos para los artículos informativos */
+.info-section, .features-section, .benefits-section {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.info-section:hover, .features-section:hover, .benefits-section:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.info-section h3, .features-section h3, .benefits-section h3 {
+    font-size: var(--font-size-3xl);
+    margin-bottom: 1.5rem;
+    color: var(--black);
+    position: relative;
+    display: inline-block;
+}
+
+.info-section h3::after, .features-section h3::after, .benefits-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: var(--radius-full);
+}
+
+.info-section p {
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    color: var(--dark-gray);
+}
+
+.features-section ul, .benefits-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.features-section li, .benefits-section li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+}
+
+.features-section .material-icons, .benefits-section .material-icons {
+    color: var(--accent);
+    margin-right: 1rem;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 767px) {
+    .hero {
+        height: auto;
+        min-height: 100vh;
+        padding-top: 80px;
+        padding-bottom: 350px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .hero-content {
+        max-width: 90%;
+        margin: 0 auto 50px auto;
+        text-align: center;
+        padding-top: 2rem;
+        z-index: 4;
+        position: relative;
+    }
+    
+    .hero-content h2 {
+        font-size: 2.5rem;
+        transform: none !important;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+        transform: none !important;
+    }
+    
+    .preview-float {
+        width: 85%;
+        bottom: 150px;
+        max-width: 300px;
+        transform: translateX(-50%) translateZ(-20px) !important;
+        z-index: 2;
+    }
+
+    .terapias-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .comentarios-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .carousel-container {
+        padding: 0 1rem;
+    }
+    
+    .carousel-button {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .carousel-button.prev {
+        left: 5px;
+    }
+    
+    .carousel-button.next {
+        right: 5px;
+    }
+    
+    .recuerdos-container {
+        padding: 0.5rem 0;
+    }
+    
+    .recuerdo-card {
+        min-width: 220px;
+        flex: 0 0 220px;
+        height: 300px;
+    }
+    
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .info-section, .features-section, .benefits-section {
+        padding: 1.5rem;
+        margin: 2rem 1rem;
+        border-radius: var(--radius-md);
+    }
+    
+    .info-section h3, .features-section h3, .benefits-section h3 {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .info-section p, .features-section li, .benefits-section li {
+        font-size: var(--font-size-base);
+    }
+}
